@@ -8,7 +8,6 @@ use IurieMalai\ViewPaths\Services\ViewPathsService;
 class ViewPathsListCommand extends Command
 {
     public $signature = 'view-paths:list';
-
     public $description = 'List all configured and cached view paths';
 
     public function handle(ViewPathsService $viewPathsService): int
