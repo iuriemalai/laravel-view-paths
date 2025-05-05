@@ -12,15 +12,25 @@ use Illuminate\Support\Facades\View;
 class ViewPathsService
 {
     protected array $paths;
+
     protected array $namespacedPaths;
+
     protected bool $cacheEnabled;
+
     protected int|string|null $cacheDuration;
+
     protected string $cacheKey;
+
     protected bool $loggingEnabled;
+
     protected string $logLevel;
+
     protected ?string $logChannel;
+
     protected bool $logViewsInfo;
+
     protected Repository $cache;
+
     protected LogManager $logger;
 
     /**

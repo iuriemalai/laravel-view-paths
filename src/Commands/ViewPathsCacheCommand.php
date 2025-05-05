@@ -8,6 +8,7 @@ use IurieMalai\ViewPaths\Services\ViewPathsService;
 class ViewPathsCacheCommand extends Command
 {
     public $signature = 'view-paths:cache';
+
     public $description = 'Cache view paths for improved performance';
 
     public function handle(ViewPathsService $viewPathsService): int
