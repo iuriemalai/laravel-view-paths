@@ -34,12 +34,12 @@
     },
     "autoload": {
         "psr-4": {
-            "IurieMalai\\LaravelViewPaths\\": "src/"
+            "IurieMalai\\ViewPaths\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "IurieMalai\\LaravelViewPaths\\Tests\\": "tests/",
+            "IurieMalai\\ViewPaths\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -62,10 +62,7 @@
         "laravel": {
             "providers": [
                 "IurieMalai\\ViewPaths\\ViewPathsServiceProvider"
-            ],
-            "aliases": {
-                "ViewPaths": "IurieMalai\\ViewPaths\\Facades\\ViewPaths"
-            }
+            ]
         }
     },
     "repositories": [
