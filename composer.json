@@ -69,10 +69,10 @@
         }
     },
     "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/iuriemalai/laravel-view-paths"
-        }
+      {
+        "type": "vcs",
+        "url": "https://github.com/iuriemalai/laravel-view-paths"
+      }
     ],
     "minimum-stability": "dev",
     "prefer-stable": true
