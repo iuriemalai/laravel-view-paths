@@ -5,7 +5,6 @@ namespace IurieMalai\ViewPaths\Services;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Log\LogManager;
 use Illuminate\Support\Facades\View;
-use Illuminate\Support\Str;
 
 /**
  * Manages view paths and their caching for Laravel applications.
@@ -13,16 +12,25 @@ use Illuminate\Support\Str;
 class ViewPathsService
 {
     protected array $paths;
+
     protected array $namespacedPaths;
+
     protected bool $cacheEnabled;
+
     protected int|string|null $cacheDuration;
+
     protected string $cacheKey;
+
     protected bool $loggingEnabled;
+
     protected string $logLevel;
+
     protected ?string $logChannel;
+
     protected bool $logViewsInfo;
 
     protected Repository $cache;
+
     protected LogManager $logger;
 
     /**
@@ -55,9 +63,9 @@ class ViewPathsService
     /**
      * Logs a message with the configured level and channel.
      */
-    protected function log(string $message, string $level = null): void
+    protected function log(string $message, ?string $level = null): void
     {
-        if (!$this->loggingEnabled) {
+        if (! $this->loggingEnabled) {
             return;
         }
 
@@ -81,15 +89,15 @@ class ViewPathsService
                 $paths = $this->getValidPaths();
             }
 
-            if (!empty($paths)) {
-                if (!$this->cache->has($this->cacheKey)) {
+            if (! empty($paths)) {
+                if (! $this->cache->has($this->cacheKey)) {
                     $this->log('Retrieved view paths directly', 'info');
                 }
 
                 foreach ($paths as $path) {
                     View::prependLocation($path);
                 }
-                $this->log('Added ' . count($paths) . ' view paths: ' . implode(', ', $paths), 'info');
+                $this->log('Added '.count($paths).' view paths: '.implode(', ', $paths), 'info');
             } else {
                 $this->log('No regular view paths configured', 'info');
             }
@@ -101,8 +109,8 @@ class ViewPathsService
                 $namespacedPaths = $this->getValidNamespacedPaths();
             }
 
-            if (!empty($namespacedPaths)) {
-                if (!$this->cache->has($this->cacheKey)) {
+            if (! empty($namespacedPaths)) {
+                if (! $this->cache->has($this->cacheKey)) {
                     $this->log('Retrieved namespaced view paths directly', 'info');
                 }
 
@@ -119,7 +127,7 @@ class ViewPathsService
                 $this->log('No namespaced view paths configured', 'info');
             }
         } catch (\Exception $e) {
-            $this->log('Failed to load view paths: ' . $e->getMessage(), 'error');
+            $this->log('Failed to load view paths: '.$e->getMessage(), 'error');
         }
     }
 
@@ -130,7 +138,7 @@ class ViewPathsService
     {
         $data = (array) $this->cache->get($this->cacheKey, ['paths' => [], 'namespaced_paths' => []]);
 
-        if (!empty($data['paths'])) {
+        if (! empty($data['paths'])) {
             $this->log('Retrieved view paths from cache', 'info');
         }
 
@@ -144,7 +152,7 @@ class ViewPathsService
     {
         $data = (array) $this->cache->get($this->cacheKey, ['paths' => [], 'namespaced_paths' => []]);
 
-        if (!empty($data['namespaced_paths'])) {
+        if (! empty($data['namespaced_paths'])) {
             $this->log('Retrieved namespaced view paths from cache', 'info');
         }
 
@@ -157,7 +165,7 @@ class ViewPathsService
     protected function getValidPaths(): array
     {
         $result = collect($this->paths)
-            ->filter(fn($path) => is_dir($path))
+            ->filter(fn ($path) => is_dir($path))
             ->values()
             ->all();
 
@@ -196,9 +204,10 @@ class ViewPathsService
      */
     public function warmCache(): void
     {
-        if (!$this->cacheEnabled) {
+        if (! $this->cacheEnabled) {
             $this->clearCache();
             $this->log('Cache warming skipped (caching disabled)', 'info');
+
             return;
         }
 
@@ -221,16 +230,16 @@ class ViewPathsService
                 $duration = $this->parseDuration($this->cacheDuration);
                 if ($duration) {
                     $this->cache->put($this->cacheKey, $cacheData, $duration);
-                    $this->log('View paths cached with expiration: ' . $duration->format('Y-m-d H:i:s'), 'info');
+                    $this->log('View paths cached with expiration: '.$duration->format('Y-m-d H:i:s'), 'info');
                 } else {
                     $this->cache->forever($this->cacheKey, $cacheData);
                     $this->log('View paths cached forever (fallback)', 'info');
                 }
             }
 
-            $this->log('Cache warmed with ' . count($cacheData['paths']) . ' regular paths and ' . count($cacheData['namespaced_paths']) . ' namespaced paths', 'info');
+            $this->log('Cache warmed with '.count($cacheData['paths']).' regular paths and '.count($cacheData['namespaced_paths']).' namespaced paths', 'info');
         } catch (\Exception $e) {
-            $this->log('Failed to warm cache: ' . $e->getMessage(), 'error');
+            $this->log('Failed to warm cache: '.$e->getMessage(), 'error');
         }
     }
 
@@ -239,17 +248,20 @@ class ViewPathsService
      */
     public function clearCache(): bool
     {
-        if (!$this->cacheEnabled && !$this->cache->has($this->cacheKey)) {
+        if (! $this->cacheEnabled && ! $this->cache->has($this->cacheKey)) {
             $this->log('Cache clearing skipped (caching disabled)', 'info');
+
             return false;
         }
 
         try {
             $this->cache->forget($this->cacheKey);
             $this->log("View paths cache cleared (cache key '{$this->cacheKey}')", 'info');
+
             return true;
         } catch (\Exception $e) {
-            $this->log('Failed to clear cache: ' . $e->getMessage(), 'error');
+            $this->log('Failed to clear cache: '.$e->getMessage(), 'error');
+
             return false;
         }
     }
@@ -257,7 +269,7 @@ class ViewPathsService
     /**
      * Parses a duration string or integer into a DateTimeInterface.
      */
-    protected function parseDuration(int|string|null $duration): \DateTimeInterface|null
+    protected function parseDuration(int|string|null $duration): ?\DateTimeInterface
     {
         if ($duration === 'forever' || $duration === null || empty($duration)) {
             return null;
@@ -284,6 +296,7 @@ class ViewPathsService
         }
 
         $this->log("Unrecognized duration format: {$duration}, defaulting to 1 hour", 'warning');
+
         return now()->addHour();
     }
 
@@ -308,7 +321,7 @@ class ViewPathsService
      */
     public function getCachedViewPaths(): array
     {
-        if (!$this->cacheEnabled || !$this->cache->has($this->cacheKey)) {
+        if (! $this->cacheEnabled || ! $this->cache->has($this->cacheKey)) {
             return ['paths' => [], 'namespaced_paths' => []];
         }
 
@@ -336,7 +349,7 @@ class ViewPathsService
      */
     public function viewsInfoLogger(): void
     {
-        if (!$this->logViewsInfo) {
+        if (! $this->logViewsInfo) {
             return;
         }
 

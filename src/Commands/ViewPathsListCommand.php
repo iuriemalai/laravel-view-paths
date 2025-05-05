@@ -14,7 +14,7 @@ class ViewPathsListCommand extends Command
     public function handle(ViewPathsService $viewPathsService): int
     {
         $cacheInfo = $viewPathsService->getCacheInfo();
-        
+
         $this->info('View Paths Configuration:');
         $this->table(
             ['Cache Enabled', 'Cache Duration', 'Cache Key', 'Is Cached'],
@@ -25,21 +25,21 @@ class ViewPathsListCommand extends Command
                 $cacheInfo['config']['is_cached'] ? 'Yes' : 'No',
             ]]
         );
-        
+
         // Get cached paths
         $regularPaths = $cacheInfo['paths']['paths'] ?? [];
         $namespacedPaths = $cacheInfo['paths']['namespaced_paths'] ?? [];
-        
+
         $this->info('Cached Paths:');
-        
-        if (!empty($regularPaths)) {
+
+        if (! empty($regularPaths)) {
             $this->info('Regular view paths:');
-            $this->table(['Path'], array_map(fn($path) => [$path], $regularPaths));
+            $this->table(['Path'], array_map(fn ($path) => [$path], $regularPaths));
         } else {
             $this->info('No regular view paths in cache.');
         }
-        
-        if (!empty($namespacedPaths)) {
+
+        if (! empty($namespacedPaths)) {
             $this->info('Namespaced view paths:');
             $namespacedData = [];
             foreach ($namespacedPaths as $namespace => $path) {
@@ -49,24 +49,24 @@ class ViewPathsListCommand extends Command
         } else {
             $this->info('No namespaced view paths in cache.');
         }
-        
+
         // Show configured paths that haven't been cached yet
-        if (!$cacheInfo['config']['is_cached']) {
+        if (! $cacheInfo['config']['is_cached']) {
             $this->info('Configured paths (not cached):');
-            
+
             // Get current configuration
             $config = config('view_paths');
             $configuredPaths = $config['paths'] ?? [];
             $configuredNamespacedPaths = $config['namespaced_paths'] ?? [];
-            
-            if (!empty($configuredPaths)) {
+
+            if (! empty($configuredPaths)) {
                 $this->info('Regular view paths:');
-                $this->table(['Path'], array_map(fn($path) => [$path], $configuredPaths));
+                $this->table(['Path'], array_map(fn ($path) => [$path], $configuredPaths));
             } else {
                 $this->info('No regular view paths configured.');
             }
-            
-            if (!empty($configuredNamespacedPaths)) {
+
+            if (! empty($configuredNamespacedPaths)) {
                 $this->info('Namespaced view paths:');
                 $namespacedData = [];
                 foreach ($configuredNamespacedPaths as $namespace => $path) {

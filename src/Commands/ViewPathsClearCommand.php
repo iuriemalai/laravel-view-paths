@@ -14,9 +14,9 @@ class ViewPathsClearCommand extends Command
     public function handle(ViewPathsService $viewPathsService): int
     {
         $this->info('Clearing view paths cache...');
-        
+
         $result = $viewPathsService->clearCache();
-        
+
         if ($result) {
             $this->info('View paths cache has been cleared successfully.');
         } else {

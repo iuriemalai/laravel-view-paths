@@ -14,11 +14,11 @@ class ViewPathsCacheCommand extends Command
     public function handle(ViewPathsService $viewPathsService): int
     {
         $this->info('Warming view paths cache...');
-        
+
         $viewPathsService->warmCache();
-        
+
         $cacheInfo = $viewPathsService->getCacheInfo();
-        
+
         $this->info('View paths cache has been warmed successfully.');
         $this->table(
             ['Cache Enabled', 'Cache Duration', 'Cache Key', 'Is Cached'],
@@ -29,16 +29,16 @@ class ViewPathsCacheCommand extends Command
                 $cacheInfo['config']['is_cached'] ? 'Yes' : 'No',
             ]]
         );
-        
+
         $regularPaths = $cacheInfo['paths']['paths'] ?? [];
         $namespacedPaths = $cacheInfo['paths']['namespaced_paths'] ?? [];
-        
-        if (!empty($regularPaths)) {
+
+        if (! empty($regularPaths)) {
             $this->info('Regular view paths:');
-            $this->table(['Path'], array_map(fn($path) => [$path], $regularPaths));
+            $this->table(['Path'], array_map(fn ($path) => [$path], $regularPaths));
         }
-        
-        if (!empty($namespacedPaths)) {
+
+        if (! empty($namespacedPaths)) {
             $this->info('Namespaced view paths:');
             $namespacedData = [];
             foreach ($namespacedPaths as $namespace => $path) {

@@ -3,8 +3,8 @@
 namespace IurieMalai\LaravelViewPaths\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Orchestra\Testbench\TestCase as Orchestra;
 use IurieMalai\LaravelViewPaths\LaravelViewPathsServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {

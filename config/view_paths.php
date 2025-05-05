@@ -1,4 +1,5 @@
 <?php
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -50,7 +51,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | Define how long the additional view paths should be cached.
-    | 
+    |
     | Supported formats:
     | - an integer for seconds (ex: 15)
     | - a string ending in:
