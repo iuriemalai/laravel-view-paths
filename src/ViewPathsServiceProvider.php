@@ -1,0 +1,67 @@
+<?php
+
+namespace IurieMalai\ViewPaths;
+
+use Illuminate\Contracts\Cache\Repository;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Log\LogManager;
+use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
+use IurieMalai\ViewPaths\Commands\ViewPathsCacheCommand;
+use IurieMalai\ViewPaths\Commands\ViewPathsClearCommand;
+use IurieMalai\ViewPaths\Commands\ViewPathsListCommand;
+use IurieMalai\ViewPaths\Services\ViewPathsService;
+
+class ViewPathsServiceProvider extends PackageServiceProvider
+{
+    /**
+     * Configure the package.
+     */
+    public function configurePackage(Package $package): void
+    {
+        $package
+            ->name('laravel-view-paths')
+            ->hasConfigFile('view_paths')
+            ->hasCommands([
+                ViewPathsCacheCommand::class,
+                ViewPathsClearCommand::class,
+                ViewPathsListCommand::class,
+            ]);
+    }
+
+    /**
+     * Register the ViewPathsService service.
+     */
+    public function packageRegistered(): void
+    {
+        $this->app->singleton(ViewPathsService::class, function (Application $app) {
+            return new ViewPathsService(
+                $app->make(Repository::class),
+                $app->make(LogManager::class)
+            );
+        });
+    }
+
+    /**
+     * Bootstrap the ViewPathsService service.
+     */
+    public function packageBooted(): void
+    {
+        // Only load paths in web context or when running queue workers
+        if (!$this->app->runningInConsole() || $this->isRunningInQueue()) {
+            $viewPathsService = $this->app->make(ViewPathsService::class);
+            $viewPathsService->loadViewPaths();
+        }
+    }
+    
+    /**
+     * Determine if the application is running in the queue worker.
+     *
+     * @return bool
+     */
+    protected function isRunningInQueue(): bool
+    {
+        return ($this->app->bound('queue.worker') || 
+            isset($_SERVER['argv'][0]) && str_contains($_SERVER['argv'][0], 'queue:work'));
+    }
+}
