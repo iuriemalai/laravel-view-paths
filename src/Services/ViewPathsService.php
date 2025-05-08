@@ -4,9 +4,13 @@ namespace IurieMalai\ViewPaths\Services;
 
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Log\LogManager;
+<<<<<<< HEAD
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
+=======
+>>>>>>> 9d388abe3cf9e5c191dca5051ea76bd60695070e
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\View;
 use Statamic\Facades\Cascade;
 
 /**
