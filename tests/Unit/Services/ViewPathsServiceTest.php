@@ -15,8 +15,11 @@ use Tests\TestCase;
 class ViewPathsServiceTest extends TestCase
 {
     protected $cacheMock;
+
     protected $loggerMock;
+
     protected ViewPathsService $service;
+
     protected $fakePath;
 
     protected function setUp(): void
@@ -28,7 +31,7 @@ class ViewPathsServiceTest extends TestCase
 
         // Create test directory if needed
         $this->fakePath = base_path('tests/Fixtures/child_views');
-        if (!is_dir($this->fakePath)) {
+        if (! is_dir($this->fakePath)) {
             mkdir($this->fakePath, 0777, true);
         }
 
@@ -59,33 +62,33 @@ class ViewPathsServiceTest extends TestCase
         // Prepare cache data
         $cachedData = [
             'paths' => ['/cached/path'],
-            'namespaced_paths' => ['cached_namespace' => '/cached/namespace/path']
+            'namespaced_paths' => ['cached_namespace' => '/cached/namespace/path'],
         ];
-        
+
         // Mock cache is enabled
         config()->set('view_paths.cache_enabled', true);
-        
+
         // Mock cache has the data
         $this->cacheMock->shouldReceive('has')
             ->with('view_paths_test')
             ->andReturn(true);
-            
+
         $this->cacheMock->shouldReceive('get')
             ->with('view_paths_test', Mockery::type('array'))
             ->andReturn($cachedData);
-        
+
         // The service should not try to get paths from filesystem
         $serviceSpy = Mockery::mock(ViewPathsService::class, [$this->cacheMock, $this->loggerMock])
             ->makePartial()
             ->shouldAllowMockingProtectedMethods();
-        
+
         $serviceSpy->shouldReceive('getValidPaths')->never();
         $serviceSpy->shouldReceive('getValidNamespacedPaths')->never();
-        
+
         // Get paths method should return cached paths
         $paths = $this->invokeMethod($serviceSpy, 'getPathsFromCache');
         $namespacedPaths = $this->invokeMethod($serviceSpy, 'getNamespacedPathsFromCache');
-        
+
         // Assert paths match what was in cache
         $this->assertEquals($cachedData['paths'], $paths);
         $this->assertEquals($cachedData['namespaced_paths'], $namespacedPaths);
@@ -127,20 +130,20 @@ class ViewPathsServiceTest extends TestCase
         // Set up a mix of valid and invalid paths
         $validPath = $this->fakePath;
         $invalidPath = base_path('tests/Fixtures/nonexistent_folder');
-        
+
         config()->set('view_paths.paths', [$validPath, $invalidPath]);
         config()->set('view_paths.namespaced_paths', [
             'valid' => $validPath,
-            'invalid' => $invalidPath
+            'invalid' => $invalidPath,
         ]);
-        
+
         $service = new ViewPathsService($this->cacheMock, $this->loggerMock);
-        
+
         // Test regular paths
         $validPaths = $this->invokeMethod($service, 'getValidPaths');
         $this->assertCount(1, $validPaths);
         $this->assertEquals($validPath, $validPaths[0]);
-        
+
         // Test namespaced paths
         $validNamespacedPaths = $this->invokeMethod($service, 'getValidNamespacedPaths');
         $this->assertCount(1, $validNamespacedPaths);
@@ -155,24 +158,24 @@ class ViewPathsServiceTest extends TestCase
         $regularPaths = ['/path/one', '/path/two'];
         $namespacedPaths = [
             'admin' => '/admin/views',
-            'volt-livewire' => '/volt/components'
+            'volt-livewire' => '/volt/components',
         ];
-        
+
         // Mock cache behavior
         $this->cacheMock->shouldReceive('has')->andReturn(true);
         $this->cacheMock->shouldReceive('get')->andReturn([
             'paths' => $regularPaths,
-            'namespaced_paths' => $namespacedPaths
+            'namespaced_paths' => $namespacedPaths,
         ]);
-        
+
         // Mock View and Volt
         View::shouldReceive('prependLocation')->once()->with('/path/one');
         View::shouldReceive('prependLocation')->once()->with('/path/two');
-        
+
         View::shouldReceive('prependNamespace')->once()->with('admin', '/admin/views');
-        
+
         Volt::shouldReceive('mount')->once()->with('/volt/components');
-        
+
         // Execute the method
         $this->service->loadViewPaths();
 
@@ -218,7 +221,7 @@ class ViewPathsServiceTest extends TestCase
         $this->cacheMock->shouldReceive('has')
             ->with('view_paths_test')
             ->andReturn(false);
-            
+
         $this->cacheMock->shouldReceive('forget')->never(); // Won't clear if not present
         $this->cacheMock->shouldReceive('forever')->never();
         $this->cacheMock->shouldReceive('put')->never();
@@ -267,7 +270,7 @@ class ViewPathsServiceTest extends TestCase
             '1y' => now()->addYear(),
             'invalid' => now()->addHour(),
         ];
-        
+
         foreach ($testCases as $input => $expected) {
             $result = $this->invokeMethod($this->service, 'parseDuration', [$input]);
 
@@ -287,14 +290,14 @@ class ViewPathsServiceTest extends TestCase
         // Enable logging
         config()->set('view_paths.logging.enabled', true);
         config()->set('view_paths.logging.level', 'info');
-        
+
         $service = new ViewPathsService($this->cacheMock, $this->loggerMock);
-        
+
         // Set expectation
         $this->loggerMock->shouldReceive('info')
             ->once()
             ->with('Test message');
-            
+
         // Call the log method
         $this->invokeMethod($service, 'log', ['Test message']);
 
@@ -306,13 +309,13 @@ class ViewPathsServiceTest extends TestCase
     {
         // Disable logging
         config()->set('view_paths.logging.enabled', false);
-        
+
         $service = new ViewPathsService($this->cacheMock, $this->loggerMock);
-        
+
         // Set expectation that logger should never be called
         $this->loggerMock->shouldReceive('debug')->never();
         $this->loggerMock->shouldReceive('info')->never();
-        
+
         // Call the log method
         $this->invokeMethod($service, 'log', ['Test message']);
 
@@ -325,16 +328,16 @@ class ViewPathsServiceTest extends TestCase
         $this->cacheMock->shouldReceive('has')
             ->with('view_paths_test')
             ->andReturn(true);
-            
+
         $this->cacheMock->shouldReceive('get')
             ->with('view_paths_test', Mockery::type('array'))
             ->andReturn([
                 'paths' => ['/test/path'],
-                'namespaced_paths' => ['test' => '/test/namespace']
+                'namespaced_paths' => ['test' => '/test/namespace'],
             ]);
-            
+
         $cacheInfo = $this->service->getCacheInfo();
-        
+
         $this->assertIsArray($cacheInfo);
         $this->assertArrayHasKey('config', $cacheInfo);
         $this->assertArrayHasKey('paths', $cacheInfo);
@@ -348,12 +351,12 @@ class ViewPathsServiceTest extends TestCase
     {
         config()->set('view_paths.namespaced_paths', [
             'test' => '/test/path',
-            'admin' => '/admin/path'
+            'admin' => '/admin/path',
         ]);
-        
+
         $service = new ViewPathsService($this->cacheMock, $this->loggerMock);
         $paths = $service->getNamespacedPaths();
-        
+
         $this->assertIsArray($paths);
         $this->assertCount(2, $paths);
         $this->assertEquals('/test/path', $paths['test']);
