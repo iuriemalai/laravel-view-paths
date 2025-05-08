@@ -293,7 +293,7 @@ class ViewPathsService
                 'd' => now()->addDays($amount),
                 'w' => now()->addWeeks($amount),
                 'M' => now()->addMonths($amount),
-                'y' => now()->addYears($amount),
+                'y' => now()->addYears($amount), // @phpstan-ignore match.alwaysTrue
                 default => now()->addHour(),
             };
         }
@@ -365,6 +365,7 @@ class ViewPathsService
 
     public function setLocale()
     {
+         // @phpstan-ignore class.notFound
         Cascade::hydrated(function ($cascade) {
             $locale = Session::get('locale', config('app.locale'));
 
