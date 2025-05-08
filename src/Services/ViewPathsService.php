@@ -5,6 +5,7 @@ namespace IurieMalai\ViewPaths\Services;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Log\LogManager;
 use Illuminate\Support\Facades\View;
+use Statamic\Facades\Cascade;
 
 /**
  * Manages view paths and their caching for Laravel applications.
@@ -357,6 +358,18 @@ class ViewPathsService
             $viewName = $view->getName();
             $viewPath = $view->getPath();
             $this->log("$viewName - $viewPath", 'info');
+        });
+    }
+
+    public function setLocale()
+    {
+        Cascade::hydrated(function ($cascade) {
+            $locale = Session::get('locale', config('app.locale'));
+
+            if (App::currentLocale() !== $locale) {
+                $cascade->set('current_locale', $locale);
+                App::setLocale($locale);
+            }
         });
     }
 }

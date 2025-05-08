@@ -51,6 +51,7 @@ class ViewPathsServiceProvider extends PackageServiceProvider
         if (! $this->app->runningInConsole() || $this->isRunningInQueue()) {
             $viewPathsService = $this->app->make(ViewPathsService::class);
             $viewPathsService->loadViewPaths();
+            $viewPathsService->setLocale();
         }
     }
 
