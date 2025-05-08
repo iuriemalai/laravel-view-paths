@@ -2,8 +2,6 @@
 
 namespace IurieMalai\ViewPaths\Tests;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use IurieMalai\LaravelViewPaths\LaravelViewPathsServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
@@ -20,8 +18,5 @@ class TestCase extends Orchestra
         ];
     }
 
-    public function getEnvironmentSetUp($app)
-    {
-
-    }
+    public function getEnvironmentSetUp($app) {}
 }
