@@ -16,8 +16,8 @@
     backupStaticProperties="false"
 >
     <testsuites>
-        <testsuite name="IurieMalai Test Suite">
-            <directory>tests</directory>
+        <testsuite name="Laravel View Paths Test Suite">
+            <directory>tests/Unit/Services</directory>
         </testsuite>
     </testsuites>
     <logging>
