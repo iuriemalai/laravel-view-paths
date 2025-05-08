@@ -43,7 +43,7 @@ return [
     | storing or retrieving from the cache. Useful during development.
     |
     */
-    'cache_enabled' => env('VIEW_PATHS_CACHE_ENABLED', true),
+    'cache_enabled' => config('VIEW_PATHS_CACHE_ENABLED', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ return [
     | - the string "forever"
     |
     */
-    'cache_duration' => env('VIEW_PATHS_CACHE_DURATION', 'forever'),
+    'cache_duration' => config('VIEW_PATHS_CACHE_DURATION', 'forever'),
 
     /*
     |--------------------------------------------------------------------------
@@ -76,7 +76,7 @@ return [
     | Useful if you want to avoid key collisions.
     |
     */
-    'cache_key' => env('VIEW_PATHS_CACHE_KEY', 'view_paths'),
+    'cache_key' => config('VIEW_PATHS_CACHE_KEY', 'view_paths'),
 
     /*
     |--------------------------------------------------------------------------
@@ -88,9 +88,9 @@ return [
     |
     */
     'logging' => [
-        'enabled' => env('VIEW_PATHS_LOGGING_ENABLED', false),
-        'level' => env('VIEW_PATHS_LOG_LEVEL', 'info'), // 'debug', 'info', 'warning', 'error'
-        'channel' => env('VIEW_PATHS_LOG_CHANNEL', null), // null uses default channel
+        'enabled' => config('VIEW_PATHS_LOGGING_ENABLED', false),
+        'level' => config('VIEW_PATHS_LOG_LEVEL', 'info'), // 'debug', 'info', 'warning', 'error'
+        'channel' => config('VIEW_PATHS_LOG_CHANNEL', null), // null uses default channel
     ],
 
     /*
