@@ -366,7 +366,7 @@ class ViewPathsService
     public function setLocale()
     {
         // @phpstan-ignore-next-line
-        Cascade::hydrated(function ($cascade) { // @phpstan-ignore class.notFound
+        Cascade::hydrated(function ($cascade) {
             $locale = Session::get('locale', config('app.locale'));
 
             if (App::currentLocale() !== $locale) {
