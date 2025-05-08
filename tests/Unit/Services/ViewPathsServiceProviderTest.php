@@ -8,7 +8,7 @@ use Mockery;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-class PathsServiceProviderTest extends TestCase
+class ViewPathsServiceProviderTest extends TestCase
 {
     protected $app;
 
