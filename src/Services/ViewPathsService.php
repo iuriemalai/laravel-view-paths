@@ -363,19 +363,19 @@ class ViewPathsService
         });
     }
 
-    /*
-        public function setLocale()
-        {
-            Cascade::hydrated(function ($cascade) {
-                $locale = Session::get('locale', config('app.locale'));
+/*
+    public function setLocale()
+    {
+        Cascade::hydrated(function ($cascade) {
+            $locale = Session::get('locale', config('app.locale'));
 
-                if (App::currentLocale() !== $locale) {
-                    $cascade->set('current_locale', $locale);
-                    App::setLocale($locale);
-                }
-            });
-        }
-    */
+            if (App::currentLocale() !== $locale) {
+                $cascade->set('current_locale', $locale);
+                App::setLocale($locale);
+            }
+        });
+    }
+*/
 
     /**
      * Set the application locale based on the session.
@@ -383,21 +383,18 @@ class ViewPathsService
      */
     public function setLocale(): void
     {
-        // Set the application locale based on the session
-        $locale = Session::get('locale', config('app.locale'));
-
-        if (App::currentLocale() !== $locale) {
-            App::setLocale($locale);
-            // $this->log("Application locale set to: {$locale}", 'info');
-        }
-
+           
         // If Statamic is installed, update the Cascade as well
         if (class_exists('Statamic\Facades\Cascade')) {
             try {
-                \Statamic\Facades\Cascade::hydrated(function ($cascade) use ($locale) {
-                    $cascade->set('current_locale', $locale);
+                \Statamic\Facades\Cascade::hydrated(function ($cascade) {
+                    $locale = Session::get('locale', config('app.locale'));
+
+                    if (App::currentLocale() !== $locale) {
+                        $cascade->set('current_locale', $locale);
+                        App::setLocale($locale);
+                    }
                 });
-                // $this->log("Statamic Cascade locale set to: {$locale}", 'info');
             } catch (\Exception $e) {
                 $this->log("Failed to set Statamic Cascade locale: {$e->getMessage()}", 'warning');
             }
