@@ -25,7 +25,6 @@ class ViewPathsServiceProviderTest extends TestCase
     #[Test]
     public function it_registers_view_paths_service()
     {
-        // Execute register method
         $this->provider->register();
 
         // Assert the service is registered as a singleton
