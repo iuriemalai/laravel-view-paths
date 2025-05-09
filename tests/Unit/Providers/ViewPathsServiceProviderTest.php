@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Providers;
 
+use App\Providers\ViewPathsServiceProvider;
 use App\Services\ViewPathsService;
 use Mockery;
 use PHPUnit\Framework\Attributes\Test;
@@ -18,7 +19,7 @@ class ViewPathsServiceProviderTest extends TestCase
         parent::setUp();
 
         $this->app = $this->createApplication();
-        $this->provider = new PathsServiceProvider($this->app);
+        $this->provider = new ViewPathsServiceProvider($this->app);
     }
 
     #[Test]
@@ -52,7 +53,7 @@ class ViewPathsServiceProviderTest extends TestCase
         $appMock->instance(ViewPathsService::class, $serviceMock);
 
         // Create provider with mocked app
-        $provider = new PathsServiceProvider($appMock);
+        $provider = new ViewPathsServiceProvider($appMock);
 
         // Execute boot method
         $provider->boot();
@@ -74,7 +75,7 @@ class ViewPathsServiceProviderTest extends TestCase
         $appMock->instance(ViewPathsService::class, $serviceMock);
 
         // Create provider with mocked app
-        $provider = new PathsServiceProvider($appMock);
+        $provider = new ViewPathsServiceProvider($appMock);
 
         // Execute boot method
         $provider->boot();
@@ -96,7 +97,7 @@ class ViewPathsServiceProviderTest extends TestCase
         $appMock->instance(ViewPathsService::class, $serviceMock);
 
         // Create provider with mocked app
-        $provider = new PathsServiceProvider($appMock);
+        $provider = new ViewPathsServiceProvider($appMock);
 
         // Override $_SERVER data to simulate not being in queue worker
         $originalArgv = $_SERVER['argv'] ?? null;
@@ -122,7 +123,7 @@ class ViewPathsServiceProviderTest extends TestCase
 
         // We need to patch the isRunningInQueue method to return false
         // to prevent loadViewPaths from being called
-        $provider = Mockery::mock(PathsServiceProvider::class, [$appMock])
+        $provider = Mockery::mock(ViewPathsServiceProvider::class, [$appMock])
             ->makePartial()
             ->shouldAllowMockingProtectedMethods();
 
@@ -157,7 +158,7 @@ class ViewPathsServiceProviderTest extends TestCase
         // we'll fix the test to match what we expect it should do
 
         // Create a mock of the provider to override the isRunningInQueue method
-        $provider = Mockery::mock(PathsServiceProvider::class, [$this->app])
+        $provider = Mockery::mock(ViewPathsServiceProvider::class, [$this->app])
             ->makePartial()
             ->shouldAllowMockingProtectedMethods();
 
@@ -173,7 +174,7 @@ class ViewPathsServiceProviderTest extends TestCase
         Mockery::close();
 
         // Create a new mock for the second test
-        $provider = Mockery::mock(PathsServiceProvider::class, [$this->app])
+        $provider = Mockery::mock(ViewPathsServiceProvider::class, [$this->app])
             ->makePartial()
             ->shouldAllowMockingProtectedMethods();
 
@@ -198,7 +199,7 @@ class ViewPathsServiceProviderTest extends TestCase
         $appMock->shouldReceive('runningInConsole')->andReturn(true);
 
         // Create the provider allowing mocking of protected methods
-        $provider = Mockery::mock(PathsServiceProvider::class, [$appMock])
+        $provider = Mockery::mock(ViewPathsServiceProvider::class, [$appMock])
             ->makePartial()
             ->shouldAllowMockingProtectedMethods();
 
