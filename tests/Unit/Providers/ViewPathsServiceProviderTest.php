@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Providers;
 
-use App\ViewPathsServiceProvider;
 use App\Services\ViewPathsService;
+use App\ViewPathsServiceProvider;
 use IurieMalai\ViewPaths\Tests\TestCase;
 use Mockery;
 use PHPUnit\Framework\Attributes\Test;
