@@ -2,7 +2,6 @@
 
 namespace Tests\Unit\Providers;
 
-use App\Providers\ViewPathsServiceProvider;
 use App\Services\ViewPathsService;
 use Mockery;
 use PHPUnit\Framework\Attributes\Test;
