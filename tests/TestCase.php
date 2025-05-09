@@ -1,6 +1,6 @@
 <?php
 
-namespace IurieMalai\ViewPaths\Tests;
+namespace Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
 
