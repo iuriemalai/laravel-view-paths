@@ -42,7 +42,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/",
+            "IurieMalai\\ViewPaths\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
