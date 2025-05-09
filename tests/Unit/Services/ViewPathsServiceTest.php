@@ -6,11 +6,13 @@ use App\Services\ViewPathsService;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
 use Illuminate\Log\LogManager;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
 use IurieMalai\ViewPaths\Tests\TestCase;
 use Livewire\Volt\Volt;
 use Mockery;
 use PHPUnit\Framework\Attributes\Test;
+use Statamic\Sites\Site;
 
 class ViewPathsServiceTest extends TestCase
 {
@@ -25,6 +27,14 @@ class ViewPathsServiceTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+    // Mock the Site class
+    $mockedSite = $this->createMock(Site::class);
+    // Define how the mock should behave, e.g., returning a default value for `$handle`
+    $mockedSite->method('getHandle')->willReturn('default-handle');
+
+    // Bind the mock to the application container
+    App::instance(Site::class, $mockedSite);
 
         $this->cacheMock = Mockery::mock(CacheRepository::class);
         $this->loggerMock = Mockery::mock(LogManager::class);
