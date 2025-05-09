@@ -28,13 +28,13 @@ class ViewPathsServiceTest extends TestCase
     {
         parent::setUp();
 
-    // Mock the Site class
-    $mockedSite = $this->createMock(Site::class);
-    // Define how the mock should behave, e.g., returning a default value for `$handle`
-    $mockedSite->method('getHandle')->willReturn('default-handle');
+        // Mock the Site class
+        $mockedSite = $this->createMock(Site::class);
+        // Define how the mock should behave, e.g., returning a default value for `$handle`
+        $mockedSite->method('getHandle')->willReturn('default-handle');
 
-    // Bind the mock to the application container
-    App::instance(Site::class, $mockedSite);
+        // Bind the mock to the application container
+        App::instance(Site::class, $mockedSite);
 
         $this->cacheMock = Mockery::mock(CacheRepository::class);
         $this->loggerMock = Mockery::mock(LogManager::class);
