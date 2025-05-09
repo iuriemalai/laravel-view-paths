@@ -2,8 +2,8 @@
 
 namespace IurieMalai\ViewPaths\Tests;
 
-use Orchestra\Testbench\TestCase as Orchestra;
 use IurieMalai\ViewPaths\ViewPathsServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
