@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Services;
+namespace IurieMalai\ViewPaths\Tests\Unit\Services;
 
 use App\Services\ViewPathsService;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
