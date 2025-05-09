@@ -7,10 +7,10 @@ use Illuminate\Contracts\Cache\Repository as CacheRepository;
 use Illuminate\Log\LogManager;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\View;
+use IurieMalai\ViewPaths\Tests\TestCase;
 use Livewire\Volt\Volt;
 use Mockery;
 use PHPUnit\Framework\Attributes\Test;
-use IurieMalai\ViewPaths\Tests\TestCase;
 
 class ViewPathsServiceTest extends TestCase
 {

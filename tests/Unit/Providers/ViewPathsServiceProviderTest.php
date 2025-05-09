@@ -4,9 +4,9 @@ namespace Tests\Unit\Providers;
 
 use App\Providers\ViewPathsServiceProvider;
 use App\Services\ViewPathsService;
+use IurieMalai\ViewPaths\Tests\TestCase;
 use Mockery;
 use PHPUnit\Framework\Attributes\Test;
-use IurieMalai\ViewPaths\Tests\TestCase;
 
 class ViewPathsServiceProviderTest extends TestCase
 {
