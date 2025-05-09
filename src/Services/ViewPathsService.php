@@ -363,6 +363,7 @@ class ViewPathsService
         });
     }
 
+/*
     public function setLocale()
     {
         Cascade::hydrated(function ($cascade) {
@@ -374,6 +375,7 @@ class ViewPathsService
             }
         });
     }
+*/
 
     /**
      * Set the application locale based on the session.
