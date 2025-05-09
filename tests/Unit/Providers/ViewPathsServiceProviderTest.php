@@ -6,7 +6,7 @@ use App\Providers\ViewPathsServiceProvider;
 use App\Services\ViewPathsService;
 use Mockery;
 use PHPUnit\Framework\Attributes\Test;
-use Tests\TestCase;
+use IurieMalai\ViewPaths\Tests\TestCase;
 
 class ViewPathsServiceProviderTest extends TestCase
 {

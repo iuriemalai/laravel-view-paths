@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\View;
 use Livewire\Volt\Volt;
 use Mockery;
 use PHPUnit\Framework\Attributes\Test;
-use Tests\TestCase;
+use IurieMalai\ViewPaths\Tests\TestCase;
 
 class ViewPathsServiceTest extends TestCase
 {
