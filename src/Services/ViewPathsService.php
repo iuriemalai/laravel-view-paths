@@ -363,19 +363,19 @@ class ViewPathsService
         });
     }
 
-/*
-    public function setLocale()
-    {
-        Cascade::hydrated(function ($cascade) {
-            $locale = Session::get('locale', config('app.locale'));
+    /*
+        public function setLocale()
+        {
+            Cascade::hydrated(function ($cascade) {
+                $locale = Session::get('locale', config('app.locale'));
 
-            if (App::currentLocale() !== $locale) {
-                $cascade->set('current_locale', $locale);
-                App::setLocale($locale);
-            }
-        });
-    }
-*/
+                if (App::currentLocale() !== $locale) {
+                    $cascade->set('current_locale', $locale);
+                    App::setLocale($locale);
+                }
+            });
+        }
+    */
 
     /**
      * Set the application locale based on the session.
@@ -383,7 +383,7 @@ class ViewPathsService
      */
     public function setLocale(): void
     {
-           
+
         // If Statamic is installed, update the Cascade as well
         if (class_exists('Statamic\Facades\Cascade')) {
             try {
