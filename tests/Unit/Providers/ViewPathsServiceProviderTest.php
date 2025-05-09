@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Providers;
 
-use App\Providers\ViewPathsServiceProvider;
+use App\ViewPathsServiceProvider;
 use App\Services\ViewPathsService;
 use IurieMalai\ViewPaths\Tests\TestCase;
 use Mockery;
