@@ -36,7 +36,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Tests\\": "tests/",
+            "IurieMalai\\ViewPaths\\Tests\\": "tests/",
             "IurieMalai\\ViewPaths\\": "src/"
         }
     },
