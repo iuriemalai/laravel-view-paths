@@ -2,12 +2,12 @@
 
 namespace IurieMalai\ViewPaths\Tests\Unit\Services;
 
-use App\Services\ViewPathsService;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
 use Illuminate\Log\LogManager;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
+use IurieMalai\ViewPaths\Services\ViewPathsService;
 use IurieMalai\ViewPaths\Tests\TestCase;
 use Livewire\Volt\Volt;
 use Mockery;
