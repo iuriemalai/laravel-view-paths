@@ -363,28 +363,12 @@ class ViewPathsService
         });
     }
 
-    /*
-        public function setLocale()
-        {
-            Cascade::hydrated(function ($cascade) {
-                $locale = Session::get('locale', config('app.locale'));
-
-                if (App::currentLocale() !== $locale) {
-                    $cascade->set('current_locale', $locale);
-                    App::setLocale($locale);
-                }
-            });
-        }
-    */
-
     /**
      * Set the application locale based on the session.
      * If using Statamic, also set the locale in the Cascade.
      */
     public function setLocale(): void
     {
-
-        // If Statamic is installed, update the Cascade as well
         if (class_exists('Statamic\Facades\Cascade')) {
             try {
                 \Statamic\Facades\Cascade::hydrated(function ($cascade) {
