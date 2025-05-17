@@ -2,7 +2,7 @@
     "name": "iuriemalai/laravel-view-paths",
     "description": "Register additional view paths, giving them priority over the default ones.",
     "keywords": [
-        "IurieMalai",
+        "Iurie Malai",
         "laravel",
         "laravel-view-paths"
     ],
@@ -34,8 +34,7 @@
     },
     "autoload": {
         "psr-4": {
-            "IurieMalai\\ViewPaths\\": "src/",
-            "IurieMalai\\ViewPaths\\Database\\Factories\\": "database/factories/"
+            "IurieMalai\\ViewPaths\\": "src/"
         }
     },
     "autoload-dev": {
