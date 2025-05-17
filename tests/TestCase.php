@@ -2,7 +2,6 @@
 
 namespace IurieMalai\ViewPaths\Tests;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use IurieMalai\ViewPaths\ViewPathsServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
