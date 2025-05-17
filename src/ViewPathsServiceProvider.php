@@ -2,9 +2,9 @@
 
 namespace IurieMalai\ViewPaths;
 
+use IurieMalai\ViewPaths\Commands\ViewPathsCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use IurieMalai\ViewPaths\Commands\ViewPathsCommand;
 
 class ViewPathsServiceProvider extends PackageServiceProvider
 {
