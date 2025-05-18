@@ -47,7 +47,7 @@ class ViewPathsServiceProvider extends PackageServiceProvider
      */
     public function packageBooted(): void
     {
-        if (!config('view_paths.enabled')) {
+        if (! config('view_paths.enabled')) {
             return;
         }
 
