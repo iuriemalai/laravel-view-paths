@@ -30,6 +30,7 @@ return [
     */
     'namespaced_paths' => [
         'statamic' => base_path('resources/views/child_views/vendor/statamic'),
+        'statamic-peak-seo' => base_path('resources/views/child_views/vendor/statamic-peak-seo'),
         'volt-livewire' => base_path('resources/views/child_views/livewire'),
     ],
 
