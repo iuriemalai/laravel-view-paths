@@ -47,6 +47,10 @@ class ViewPathsServiceProvider extends PackageServiceProvider
      */
     public function packageBooted(): void
     {
+        if (!config('view_paths.enabled')) {
+            return;
+        }
+
         // Only load paths in web context or when running queue workers
         if (! $this->app->runningInConsole() || $this->isRunningInQueue()) {
             $viewPathsService = $this->app->make(ViewPathsService::class);

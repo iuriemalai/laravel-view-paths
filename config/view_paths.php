@@ -103,4 +103,17 @@ return [
     |
     */
     'log_views_info' => false,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Enable View Paths Functionality
+    |--------------------------------------------------------------------------
+    |
+    | Set this to false to completely disable the functionality provided by the
+    | View Paths package. When disabled, no additional view paths or namespaces
+    | will be registered, and no view path-related logic will be executed.
+    | Useful for temporarily turning off the package without uninstalling it.
+    |
+    */
+    'enabled' => true,
 ];
