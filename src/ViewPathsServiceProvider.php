@@ -39,8 +39,8 @@ class ViewPathsServiceProvider extends PackageServiceProvider
         // Publish config file
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                $this->package->basePath('/config/view_paths.php') => config_path('view_paths.php'),
-            ], $this->package->shortName() . '-config');
+                __DIR__ . '/config/view_paths.php' => config_path('view_paths.php'),
+            ], 'laravel-view-paths-config');
         }
     }
 
