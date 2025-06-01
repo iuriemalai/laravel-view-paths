@@ -40,7 +40,7 @@ class ViewPathsServiceProvider extends PackageServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 $this->package->basePath('config/view_paths.php') => config_path('view_paths.php'),
-            ], $this->package->shortName() . '-config');
+            ], $this->package->shortName().'-config');
         }
     }
 
