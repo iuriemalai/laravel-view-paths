@@ -22,6 +22,7 @@ class ViewPathsServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-view-paths')
             ->hasConfigFile('view_paths')
+            ->publishesConfigFile() // This enables auto-publishing of config file
             ->hasCommands([
                 ViewPathsCacheCommand::class,
                 ViewPathsClearCommand::class,
