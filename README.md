@@ -20,7 +20,7 @@ We highly appreciate you sending us a postcard from your hometown, mentioning wh
 You can install the package via composer:
 
 ```bash
-composer require iuriemalai/laravel-view-paths
+composer require iuriemalai/laravel-view-paths:dev-main
 ```
 
 You can publish and run the migrations with:
