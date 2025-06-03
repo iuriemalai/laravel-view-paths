@@ -9,9 +9,8 @@ use IurieMalai\ViewPaths\Commands\ViewPathsCacheCommand;
 use IurieMalai\ViewPaths\Commands\ViewPathsClearCommand;
 use IurieMalai\ViewPaths\Commands\ViewPathsListCommand;
 use IurieMalai\ViewPaths\Services\ViewPathsService;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\Commands\Concerns;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class ViewPathsServiceProvider extends PackageServiceProvider
 {
