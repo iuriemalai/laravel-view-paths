@@ -26,11 +26,11 @@ class ViewPathsServiceProvider extends PackageServiceProvider
                 ViewPathsCacheCommand::class,
                 ViewPathsClearCommand::class,
                 ViewPathsListCommand::class,
-            ]);
-        //            ->hasInstallCommand(function(InstallCommand $command) {
-        //                $command
-        //                    ->publishConfigFile()
-        //            })
+            ])
+            ->hasInstallCommand(function(InstallCommand $command) {
+                $command
+                    ->publishConfigFile()
+            });
     }
 
     /**
