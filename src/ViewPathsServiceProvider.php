@@ -41,7 +41,7 @@ class ViewPathsServiceProvider extends PackageServiceProvider
     {
         parent::boot();
 
-    // Publish config file
+        // Publish config file
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/view_paths.php' => config_path('view_paths.php'),
