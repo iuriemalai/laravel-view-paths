@@ -30,7 +30,7 @@ class ViewPathsServiceProvider extends PackageServiceProvider
             ->hasInstallCommand(function(InstallCommand $command) {
                 $command
                     ->publishConfigFile()
-            });
+            );
     }
 
     /**
