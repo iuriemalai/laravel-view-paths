@@ -12,6 +12,7 @@ use IurieMalai\ViewPaths\Services\ViewPathsService;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\Commands\Concerns;
+use Spatie\LaravelPackageTools\Commands\InstallCommand;
 
 class ViewPathsServiceProvider extends PackageServiceProvider
 {
