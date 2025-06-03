@@ -9,6 +9,7 @@ use IurieMalai\ViewPaths\Commands\ViewPathsCacheCommand;
 use IurieMalai\ViewPaths\Commands\ViewPathsClearCommand;
 use IurieMalai\ViewPaths\Commands\ViewPathsListCommand;
 use IurieMalai\ViewPaths\Services\ViewPathsService;
+use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -29,8 +30,8 @@ class ViewPathsServiceProvider extends PackageServiceProvider
             ])
             ->hasInstallCommand(function(InstallCommand $command) {
                 $command
-                    ->publishConfigFile()
-            );
+                    ->publishConfigFile();
+            });
     }
 
     /**
