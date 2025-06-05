@@ -5,6 +5,7 @@ namespace IurieMalai\ViewPaths\Services;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Log\LogManager;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 use Statamic\Facades\Cascade;
@@ -118,6 +119,12 @@ class ViewPathsService
                 }
 
                 foreach ($namespacedPaths as $namespace => $path) {
+
+                    if ($namespace === 'flux') {
+                        //$this->log(hash('xxh128', $namespace));
+                        Blade::anonymousComponentPath($path, 'flux');
+                    }
+
                     if ($namespace === 'volt-livewire' && class_exists('\Livewire\Volt\Volt')) {
                         \Livewire\Volt\Volt::mount($path);
                         $this->log("Mounted Volt components from path: {$path}", 'info');
