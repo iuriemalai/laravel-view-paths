@@ -121,7 +121,7 @@ class ViewPathsService
                 foreach ($namespacedPaths as $namespace => $path) {
 
                     if ($namespace === 'flux') {
-                        //$this->log(hash('xxh128', $namespace));
+                        // $this->log(hash('xxh128', $namespace));
                         Blade::anonymousComponentPath($path, 'flux');
                     }
 
