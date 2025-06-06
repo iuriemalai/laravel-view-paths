@@ -13,7 +13,7 @@ return [
     */
     'paths' => [
         base_path('resources/views_peak'),
-        // base_path('resources/views_starters/laravel/livewire-starter-kit'),
+        base_path('resources/views_starters/laravel/livewire-starter-kit'),
         // base_path('vendor/laraveldaily/starter-kit/resources/views'),
         // Example: resource_path('views/theme_views'),
         // Example: storage_path('custom/another/path'),
@@ -33,8 +33,8 @@ return [
     'namespaced_paths' => [
         'statamic' => base_path('resources/views_peak/vendor/statamic'),
         // 'statamic-peak-seo' => base_path('resources/views_peak/vendor/statamic-peak-seo'),
-        // 'volt-livewire' => base_path('resources/views_starters/laravel/livewire-starter-kit/livewire'),
-        // 'flux' => base_path('resources/views_starters/laravel/livewire-starter-kit/flux'),
+        'volt-livewire' => base_path('resources/views_starters/laravel/livewire-starter-kit/livewire'),
+        'flux' => base_path('resources/views_starters/laravel/livewire-starter-kit/flux'),
     ],
 
     /*
