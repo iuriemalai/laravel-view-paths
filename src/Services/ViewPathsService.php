@@ -123,6 +123,8 @@ class ViewPathsService
                     if ($namespace === 'flux') {
                         // $this->log(hash('xxh128', $namespace));
                         Blade::anonymousComponentPath($path, 'flux');
+
+                        config(['livewire.view_path' => $path . '/../livewire']);
                     }
 
                     if ($namespace === 'volt-livewire' && class_exists('\Livewire\Volt\Volt')) {
